@@ -48,6 +48,7 @@
 "En unos minutos te enviaremos por e-mail el resultado." = "Em poucos minutos enviaremos por e-mail o resultado";
 "No se pudo realizar el pago." = "Não foi possível realizar o pagamento";
 "PAYMENT_ERROR" = "Não foi possível realizar o pagamento";
+"PREFERENCE_ERROR" = "Não é possível criar preferências";
 "Ingresa el número de la tarjeta de crédito" = "Digite o número do cartão de crédito";
 "El número de tarjeta que ingresaste no se corresponde con el tipo de tarjeta" = "O número do cartão de crédito digitado não coincide com o tipo de cartão";
 "El número de tarjeta que ingresaste es incorrecto" = "O número do cartão de crédito digitado está incorreto";

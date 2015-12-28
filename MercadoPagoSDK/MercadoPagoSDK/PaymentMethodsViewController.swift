@@ -17,14 +17,17 @@ public class PaymentMethodsViewController : UIViewController, UITableViewDataSou
     var items : [PaymentMethod]!
     var supportedPaymentTypes: [String]!
     var bundle : NSBundle? = MercadoPago.getBundle()
+    var acceptAccoutMoney : Bool = false
     
     var callback : ((paymentMethod : PaymentMethod) -> Void)?
     
-    init(merchantPublicKey: String, supportedPaymentTypes: [String], callback:(paymentMethod: PaymentMethod) -> Void) {
+    init(merchantPublicKey: String, supportedPaymentTypes: [String], acceptAccoutMoney : Bool, callback:(paymentMethod: PaymentMethod) -> Void) {
         super.init(nibName: "PaymentMethodsViewController", bundle: bundle)
         self.publicKey = merchantPublicKey
         self.supportedPaymentTypes = supportedPaymentTypes
+        self.acceptAccoutMoney = acceptAccoutMoney
         self.callback = callback
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -67,6 +70,15 @@ public class PaymentMethodsViewController : UIViewController, UITableViewDataSou
                             }
                         }
                     }
+                    
+                    if self.acceptAccoutMoney {
+                        let accountMoney = PaymentMethod()
+                        accountMoney._id = "account_money"
+                        accountMoney.name = "MercadoPago"
+                        accountMoney.paymentTypeId = "account_money"
+                        pms.append(accountMoney)
+                    }
+                    
                     self.items = pms
                 }
                 self.tableView.reloadData()
@@ -91,7 +103,12 @@ public class PaymentMethodsViewController : UIViewController, UITableViewDataSou
         
         let paymentMethod : PaymentMethod = items[indexPath.row]
         pmcell.setLabel(paymentMethod.name)
-        pmcell.setImageWithName("icoTc_" + paymentMethod._id)
+        if paymentMethod.name == "MercadoPago" {
+            pmcell.setImageWithName("mpLogo")
+        } else {
+            pmcell.setImageWithName("icoTc_" + paymentMethod._id)
+        }
+        
         
         return pmcell
     }
@@ -101,6 +118,12 @@ public class PaymentMethodsViewController : UIViewController, UITableViewDataSou
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.callback!(paymentMethod: self.items![indexPath.row])
+        if self.items![indexPath.row].name == "MercadoPago" {
+            NSNotificationCenter.defaultCenter().postNotificationName("payWithAccountMoney", object: nil)
+        } else {
+            self.callback!(paymentMethod: self.items![indexPath.row])
+        }
     }
+    
+    
 }

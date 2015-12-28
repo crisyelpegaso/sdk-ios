@@ -240,6 +240,12 @@
 		0FE3E3801AE706B600C27B97 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E37E1AE706B600C27B97 /* Utils.swift */; };
 		0FE3E38D1AE7174600C27B97 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E38C1AE7174600C27B97 /* Serializable.swift */; };
 		0FE3E38E1AE7174600C27B97 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E38C1AE7174600C27B97 /* Serializable.swift */; };
+		7634EA7E1C2AF30100C517F5 /* CheckoutPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7634EA7D1C2AF30100C517F5 /* CheckoutPreference.swift */; };
+		7634EA801C2AFCBE00C517F5 /* MerchantPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7634EA7F1C2AFCBE00C517F5 /* MerchantPreference.swift */; };
+		7634EA811C2B147A00C517F5 /* MerchantPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7634EA7F1C2AFCBE00C517F5 /* MerchantPreference.swift */; };
+		7634EA891C2B354B00C517F5 /* CheckoutPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7634EA7D1C2AF30100C517F5 /* CheckoutPreference.swift */; };
+		76FFE40E1C317D5300D56260 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FFE40C1C317D5300D56260 /* CheckoutViewController.swift */; };
+		76FFE4101C31855700D56260 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FFE40C1C317D5300D56260 /* CheckoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -378,6 +384,9 @@
 		0FDB3DAD1B1683610047A4D4 /* MPToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPToolbar.swift; sourceTree = "<group>"; };
 		0FE3E37E1AE706B600C27B97 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0FE3E38C1AE7174600C27B97 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		7634EA7D1C2AF30100C517F5 /* CheckoutPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutPreference.swift; sourceTree = "<group>"; };
+		7634EA7F1C2AFCBE00C517F5 /* MerchantPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerchantPreference.swift; sourceTree = "<group>"; };
+		76FFE40C1C317D5300D56260 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +518,8 @@
 				0F9883551AD2AB6000F750F0 /* Token.swift */,
 				0F9883561AD2AB6000F750F0 /* TransactionDetails.swift */,
 				0FC4FC171B0FAA6400CF7148 /* Promo.swift */,
+				7634EA7D1C2AF30100C517F5 /* CheckoutPreference.swift */,
+				7634EA7F1C2AFCBE00C517F5 /* MerchantPreference.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -560,6 +571,7 @@
 		0F9883C01AD2AD3200F750F0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				76FFE40B1C317D0100D56260 /* Checkout */,
 				0FC4FC1D1B0FAEBF00CF7148 /* Promos */,
 				0F98861B1AD397F400F750F0 /* Utils */,
 				0F98843B1AD2AE8000F750F0 /* Vault */,
@@ -785,6 +797,14 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		76FFE40B1C317D0100D56260 /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				76FFE40C1C317D5300D56260 /* CheckoutViewController.swift */,
+			);
+			name = Checkout;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -994,10 +1014,12 @@
 				0F9884291AD2AE3100F750F0 /* NewCardViewController.swift in Sources */,
 				0F98835B1AD2AB6000F750F0 /* Bin.swift in Sources */,
 				0F98838D1AD2AB6000F750F0 /* Phone.swift in Sources */,
+				7634EA7E1C2AF30100C517F5 /* CheckoutPreference.swift in Sources */,
 				0F98835D1AD2AB6000F750F0 /* Card.swift in Sources */,
 				0FC4FC1B1B0FAD0600CF7148 /* PromosService.swift in Sources */,
 				0F9883631AD2AB6000F750F0 /* CardNumber.swift in Sources */,
 				0F98836D1AD2AB6000F750F0 /* Device.swift in Sources */,
+				76FFE40E1C317D5300D56260 /* CheckoutViewController.swift in Sources */,
 				0F9886201AD39E7E00F750F0 /* ErrorTableViewCell.swift in Sources */,
 				0F9883571AD2AB6000F750F0 /* Address.swift in Sources */,
 				0F9884251AD2AE2700F750F0 /* MPUserIdTableViewCell.swift in Sources */,
@@ -1040,6 +1062,7 @@
 				0F9883BA1AD2AD1600F750F0 /* String+Additions.swift in Sources */,
 				0FDB3DAE1B1683610047A4D4 /* MPToolbar.swift in Sources */,
 				0F9883871AD2AB6000F750F0 /* Payment.swift in Sources */,
+				7634EA801C2AFCBE00C517F5 /* MerchantPreference.swift in Sources */,
 				0F9883951AD2AB6000F750F0 /* Setting.swift in Sources */,
 				0F9883301AD2AB3C00F750F0 /* MercadoPago.swift in Sources */,
 				0F98844F1AD2AEEF00F750F0 /* MPPaymentMethodEmptyTableViewCell.swift in Sources */,
@@ -1110,6 +1133,7 @@
 				0F98836A1AD2AB6000F750F0 /* Currency.swift in Sources */,
 				0F9884201AD2AE2700F750F0 /* MPCardholderNameTableViewCell.swift in Sources */,
 				0F9883BD1AD2AD1600F750F0 /* UIDevice+Additions.swift in Sources */,
+				76FFE4101C31855700D56260 /* CheckoutViewController.swift in Sources */,
 				0F9883FE1AD2ADEE00F750F0 /* IssuerTableViewCell.swift in Sources */,
 				0F9883981AD2AB6000F750F0 /* Token.swift in Sources */,
 				0F9886211AD39E7E00F750F0 /* ErrorTableViewCell.swift in Sources */,
@@ -1132,7 +1156,9 @@
 				0F9883D71AD2AD5500F750F0 /* PaymentIDTableViewCell.swift in Sources */,
 				0FC4FC341B0FB36F00CF7148 /* PromoTyCDetailTableViewCell.swift in Sources */,
 				0F9884441AD2AEB600F750F0 /* MPSecurityCodeTableViewCell.swift in Sources */,
+				7634EA811C2B147A00C517F5 /* MerchantPreference.swift in Sources */,
 				0F98837C1AD2AB6000F750F0 /* Issuer.swift in Sources */,
+				7634EA891C2B354B00C517F5 /* CheckoutPreference.swift in Sources */,
 				0F9883681AD2AB6000F750F0 /* Cause.swift in Sources */,
 				0F2071C31B1F4BF700CE11AB /* UILoadingView.swift in Sources */,
 			);

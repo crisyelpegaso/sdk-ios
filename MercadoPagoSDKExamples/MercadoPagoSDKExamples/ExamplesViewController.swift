@@ -14,7 +14,7 @@ class ExamplesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak private var tableview : UITableView!
 	
     let examples : [String] = ["step1_title".localized, "step2_title".localized, "step3_title".localized, "step4_title".localized,
-    "step5_title".localized, "step6_title".localized, "step7_title".localized]
+    "step5_title".localized, "step6_title".localized, "step7_title".localized, "step8_title".localized, "step9_title".localized]
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,7 +59,7 @@ class ExamplesViewController: UIViewController, UITableViewDataSource, UITableVi
 
         switch indexPath.row {
         case 0:
-            self.showViewController(MercadoPago.startPaymentMethodsViewController(ExamplesUtils.MERCHANT_PUBLIC_KEY, supportedPaymentTypes: ["credit_card", "debit_card", "prepaid_card"], callback: { (paymentMethod: PaymentMethod) -> Void in
+            self.showViewController(MercadoPago.startPaymentMethodsViewController(ExamplesUtils.MERCHANT_PUBLIC_KEY, supportedPaymentTypes: ["credit_card", "debit_card", "prepaid_card"], acceptAccoutMoney : false, callback: { (paymentMethod: PaymentMethod) -> Void in
                 self.showViewController(ExamplesUtils.startCardActivity(ExamplesUtils.MERCHANT_PUBLIC_KEY, paymentMethod: paymentMethod, callback: {(token: Token?) -> Void in
                     self.createPayment(token!._id, paymentMethod: paymentMethod, installments: 1, cardIssuerId: nil, discount: nil)
                 }))}))
@@ -86,6 +86,16 @@ class ExamplesViewController: UIViewController, UITableViewDataSource, UITableVi
 			}))
 		case 6:
 			self.showViewController(MercadoPago.startPromosViewController(ExamplesUtils.MERCHANT_PUBLIC_KEY))
+        case 7:
+            self.showViewController(
+                MercadoPago.startCheckoutViewController(ExamplesUtils.createCheckoutPreference(), publicKey: ExamplesUtils.MERCHANT_PUBLIC_KEY, merchantAccessToken : ExamplesUtils.MERCHANT_ACCESS_TOKEN, merchantBaseUrl : ExamplesUtils.MERCHANT_MOCK_BASE_URL, getCustomerUri : ExamplesUtils.MERCHANT_MOCK_GET_CUSTOMER_URI,  supportedPaymentTypes : ["credit_card", "ticket", "atm"], callback: {(paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void in
+                    self.createPayment(token, paymentMethod: paymentMethod, installments: installments, cardIssuerId: issuerId, discount: nil)
+                }))
+        case 8:
+            self.showViewController(
+                MercadoPago.startCheckoutViewController(ExamplesUtils.createCheckoutPreference(), publicKey: ExamplesUtils.MERCHANT_PUBLIC_KEY, merchantAccessToken : nil, merchantBaseUrl : nil, getCustomerUri : nil,  supportedPaymentTypes : ["credit_card", "ticket", "atm"], callback: {(paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void in
+                    self.createPayment(token, paymentMethod: paymentMethod, installments: installments, cardIssuerId: issuerId, discount: nil)
+                }))
         default:
             print("Otra opcion")
         }
@@ -113,11 +123,7 @@ class ExamplesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 	
 	func showViewController(vc: UIViewController) {
-		if #available(iOS 8.0, *) {
-			self.showViewController(vc, sender: self)
-		} else {
-			self.navigationController?.pushViewController(vc, animated: true)
-		}
+        self.navigationController?.pushViewController(vc, animated: true)
 	}
 	
     func getDiscount() {

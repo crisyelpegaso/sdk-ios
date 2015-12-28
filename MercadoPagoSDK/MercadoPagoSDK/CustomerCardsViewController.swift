@@ -17,11 +17,13 @@ public class CustomerCardsViewController : UIViewController, UITableViewDataSour
     var cards : [Card]?
     var bundle : NSBundle? = MercadoPago.getBundle()
     var callback : ((selectedCard: Card?) -> Void)?
+    var acceptAccoutMoney = false
     
-    public init(cards: [Card]?, callback: (selectedCard: Card?) -> Void) {
+    public init(cards: [Card]?, acceptAccoutMoney : Bool, callback: (selectedCard: Card?) -> Void) {
         super.init(nibName: "CustomerCardsViewController", bundle: bundle)
         self.cards = cards
         self.callback = callback
+        self.acceptAccoutMoney = acceptAccoutMoney
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -72,7 +74,12 @@ public class CustomerCardsViewController : UIViewController, UITableViewDataSour
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        callback!(selectedCard: self.cards![indexPath.row])
+        if items[indexPath.row].label == "MercadoPago" {
+             NSNotificationCenter.defaultCenter().postNotificationName("payWithAccountMoney", object: nil)
+        } else {
+            callback!(selectedCard: self.cards![indexPath.row])
+        }
+        
     }
     
     public func loadCards() {
@@ -84,6 +91,14 @@ public class CustomerCardsViewController : UIViewController, UITableViewDataSour
             paymentMethodRow.icon = "icoTc_" + card.paymentMethod!._id
             self.items.append(paymentMethodRow)
         }
+        
+        if acceptAccoutMoney {
+            let accountMoney = PaymentMethodRow()
+            accountMoney.label = "MercadoPago"
+            accountMoney.icon = "mpLogo"
+            self.items.append(accountMoney)
+        }
+        
         self.tableView.reloadData()
         self.loadingView.removeFromSuperview()
     }

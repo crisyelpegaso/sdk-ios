@@ -17,6 +17,7 @@ public class MerchantPayment : NSObject {
     public var merchantAccessToken : String!
     public var paymentMethodId : String!
     
+    
     public override init() {
         super.init()
     }

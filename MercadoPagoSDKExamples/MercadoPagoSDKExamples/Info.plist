@@ -41,5 +41,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mpago-x-callback</string>
+		<string>mpago</string>
+		<string>mercadopago</string>
+		<string>mercadopago-x-callback</string>
+	</array>
 </dict>
 </plist>
