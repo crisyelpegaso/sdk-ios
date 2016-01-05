@@ -18,11 +18,12 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
     var merchantAccessToken: String?
     var amount : Double = 0
     var bundle : NSBundle? = MercadoPago.getBundle()
+    var acceptAccoutMoney = false
     
     public var callback : ((paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void)?
     
     // Input controls
-    @IBOutlet weak private var tableview : UITableView!
+    @IBOutlet internal var tableview : UITableView!
     @IBOutlet weak private var emptyPaymentMethodCell : MPPaymentMethodEmptyTableViewCell!
     @IBOutlet weak private var paymentMethodCell : MPPaymentMethodTableViewCell!
     @IBOutlet weak private var installmentsCell : MPInstallmentsTableViewCell!
@@ -43,6 +44,10 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
     public var bin : String?
     
     public var supportedPaymentTypes : [String]?
+    
+    init() {
+        super.init(nibName: "VaultViewController", bundle: bundle)
+    }
     
     init(merchantPublicKey: String, merchantBaseUrl: String?, merchantGetCustomerUri: String?, merchantAccessToken: String?, amount: Double, supportedPaymentTypes: [String], callback: (paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void) {
         super.init(nibName: "VaultViewController", bundle: bundle)
@@ -214,7 +219,7 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
             let paymentMethodsViewController = getPaymentMethodsViewController()
 
             if self.cards != nil && self.cards!.count > 0 {
-                    let customerPaymentMethodsViewController = MercadoPago.startCustomerCardsViewController(self.cards!, callback: {(selectedCard: Card?) -> Void in
+                let customerPaymentMethodsViewController = MercadoPago.startCustomerCardsViewController(self.cards!, acceptAccoutMoney : self.acceptAccoutMoney, callback: {(selectedCard: Card?) -> Void in
                         if selectedCard != nil {
                             self.selectedCard = selectedCard
                             self.selectedPaymentMethod = self.selectedCard?.paymentMethod
@@ -331,7 +336,7 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
     }
     
     func getPaymentMethodsViewController() -> PaymentMethodsViewController {
-        return MercadoPago.startPaymentMethodsViewController(self.publicKey!, supportedPaymentTypes: self.supportedPaymentTypes!, callback: { (paymentMethod : PaymentMethod) -> Void in
+        return MercadoPago.startPaymentMethodsViewController(self.publicKey!, supportedPaymentTypes: self.supportedPaymentTypes!, acceptAccoutMoney : self.acceptAccoutMoney, callback: { (paymentMethod : PaymentMethod) -> Void in
             self.selectedPaymentMethod = paymentMethod
             if MercadoPago.isCardPaymentType(paymentMethod.paymentTypeId) {
                 self.selectedCard = nil

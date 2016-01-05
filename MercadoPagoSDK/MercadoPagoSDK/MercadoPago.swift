@@ -70,16 +70,16 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
         }
     }
     
-    public class func startCustomerCardsViewController(cards: [Card], callback: (selectedCard: Card?) -> Void) -> CustomerCardsViewController {
-        return CustomerCardsViewController(cards: cards, callback: callback)
+    public class func startCustomerCardsViewController(cards: [Card], acceptAccoutMoney : Bool, callback: (selectedCard: Card?) -> Void) -> CustomerCardsViewController {
+        return CustomerCardsViewController(cards: cards, acceptAccoutMoney : acceptAccoutMoney, callback: callback)
     }
     
     public class func startNewCardViewController(keyType: String, key: String, paymentMethod: PaymentMethod, requireSecurityCode: Bool, callback: (cardToken: CardToken) -> Void) -> NewCardViewController {
         return NewCardViewController(keyType: keyType, key: key, paymentMethod: paymentMethod, requireSecurityCode: requireSecurityCode, callback: callback)
     }
     
-    public class func startPaymentMethodsViewController(merchantPublicKey: String, supportedPaymentTypes: [String], callback:(paymentMethod: PaymentMethod) -> Void) -> PaymentMethodsViewController {
-        return PaymentMethodsViewController(merchantPublicKey: merchantPublicKey, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
+    public class func startPaymentMethodsViewController(merchantPublicKey: String, supportedPaymentTypes: [String], acceptAccoutMoney : Bool, callback:(paymentMethod: PaymentMethod) -> Void) -> PaymentMethodsViewController {
+        return PaymentMethodsViewController(merchantPublicKey: merchantPublicKey, supportedPaymentTypes: supportedPaymentTypes, acceptAccoutMoney : acceptAccoutMoney, callback: callback)
     }
     
     public class func startIssuersViewController(merchantPublicKey: String, paymentMethod: PaymentMethod, callback: (issuer: Issuer) -> Void) -> IssuersViewController {
@@ -98,6 +98,10 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
 		return PromoViewController(publicKey: merchantPublicKey)
 	}
 	
+    public class func startCheckoutViewController(checkoutPreference : CheckoutPreference, publicKey: String!, merchantAccessToken : String?, merchantBaseUrl : String?, getCustomerUri : String?, supportedPaymentTypes : [String], callback: (paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void) -> CheckoutViewController {
+        return CheckoutViewController(preference : checkoutPreference, publicKey : publicKey, merchantAccessToken : merchantAccessToken, merchantBaseUrl : merchantBaseUrl, getCustomerUri : getCustomerUri, supportedPaymentTypes : supportedPaymentTypes, callback : callback)
+    }
+    
     public class func startVaultViewController(merchantPublicKey: String, merchantBaseUrl: String?, merchantGetCustomerUri: String?, merchantAccessToken: String?, amount: Double, supportedPaymentTypes: [String], callback: (paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void) -> VaultViewController {
         
         return VaultViewController(merchantPublicKey: merchantPublicKey, merchantBaseUrl: merchantBaseUrl, merchantGetCustomerUri: merchantGetCustomerUri, merchantAccessToken: merchantAccessToken, amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)

@@ -50,14 +50,30 @@ class ExamplesUtils {
         return "id1"
     }
     
+    class var ITEM_ID_2 : String {
+        return "id2"
+    }
+    
     class var ITEM_QUANTITY : Int {
         return 1
+    }
+    
+    class var ITEM_QUANTITY_2 : Int {
+        return 2
     }
     
     class var ITEM_UNIT_PRICE : Double {
         return 100.00
     }
- 
+
+    class var ITEM_UNIT_PRICE_2 : Double {
+        return 200.00
+    }
+    
+    class var PREF_ID_MOCK : String {
+        return "167834996-099394f5-1e5a-4a43-b4aa-26e4bd60e0f2"
+    }
+    
     class func startCardActivity(merchantPublicKey: String, paymentMethod: PaymentMethod, callback: (token: Token?) -> Void) -> CardViewController {
         return CardViewController(merchantPublicKey: merchantPublicKey, paymentMethod: paymentMethod, callback: callback)
     }
@@ -86,5 +102,30 @@ class ExamplesUtils {
         
         // Create payment
         MerchantServer.createPayment(ExamplesUtils.MERCHANT_MOCK_BASE_URL, merchantPaymentUri: ExamplesUtils.MERCHANT_MOCK_CREATE_PAYMENT_URI, payment: payment, success: callback, failure: nil)
+    }
+    
+    class func createCheckoutPreference() -> CheckoutPreference {
+        
+        // Create items
+        let item_1 : Item = Item(_id: ExamplesUtils.ITEM_ID, quantity: ExamplesUtils.ITEM_QUANTITY,
+            unitPrice: ExamplesUtils.ITEM_UNIT_PRICE)
+        let item_2 : Item = Item(_id: ExamplesUtils.ITEM_ID_2, quantity: ExamplesUtils.ITEM_QUANTITY_2,
+            unitPrice: ExamplesUtils.ITEM_UNIT_PRICE_2)
+        var items = [Item]()
+        items.append(item_1)
+        items.append(item_2)
+        
+        //Create Payer
+        let payer = Payer()
+        payer._id = 2
+        payer.email = "thisis@nemail.com"
+        
+        //Create CheckoutPreference 
+        let preference = CheckoutPreference()
+        preference.id = ExamplesUtils.PREF_ID_MOCK
+        preference.items = items
+        preference.payer = payer
+        
+        return preference
     }
 }

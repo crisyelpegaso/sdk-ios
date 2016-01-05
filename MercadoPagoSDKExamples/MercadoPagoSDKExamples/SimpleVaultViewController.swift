@@ -167,11 +167,11 @@ class SimpleVaultViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 {
             
-            let paymentMethodsViewController = MercadoPago.startPaymentMethodsViewController(self.publicKey!, supportedPaymentTypes: self.supportedPaymentTypes!, callback: getSelectionCallbackPaymentMethod())
+            let paymentMethodsViewController = MercadoPago.startPaymentMethodsViewController(self.publicKey!, supportedPaymentTypes: self.supportedPaymentTypes!, acceptAccoutMoney :false, callback: getSelectionCallbackPaymentMethod())
             
             if self.cards != nil {
                 if self.cards!.count > 0 {
-                    let customerPaymentMethodsViewController = CustomerCardsViewController(cards: self.cards, callback: getCustomerPaymentMethodCallback(paymentMethodsViewController))
+                    let customerPaymentMethodsViewController = CustomerCardsViewController(cards: self.cards, acceptAccoutMoney: false, callback: getCustomerPaymentMethodCallback(paymentMethodsViewController))
                     showViewController(customerPaymentMethodsViewController)
                 } else {
                     showViewController(paymentMethodsViewController)
