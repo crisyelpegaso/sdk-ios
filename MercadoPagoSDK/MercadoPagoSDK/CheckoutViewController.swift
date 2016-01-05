@@ -59,8 +59,6 @@ public class CheckoutViewController: VaultViewController {
     func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
         switch buttonIndex{
         case 0:
-            //TODO
-            print("OPEN APPSTORE")
             let mpAppDownloadUrl = NSURL(string : "https://itunes.apple.com/us/app/apple-store/925436649")!
             UIApplication.sharedApplication().openURL(mpAppDownloadUrl)
             break
