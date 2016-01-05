@@ -59,8 +59,14 @@ public class CheckoutViewController: VaultViewController {
     func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
         switch buttonIndex{
         case 0:
-            let mpAppDownloadUrl = NSURL(string : "https://itunes.apple.com/us/app/apple-store/925436649")!
-            UIApplication.sharedApplication().openURL(mpAppDownloadUrl)
+            let downloadMPFromAppStoreUrl = NSURL(string : "itms://itunes.apple.com/us/app/apple-store/925436649")!
+            if UIApplication.sharedApplication().canOpenURL(downloadMPFromAppStoreUrl) {
+                UIApplication.sharedApplication().openURL(downloadMPFromAppStoreUrl)
+            } else {
+                let downloadMPUrl = NSURL(string : "https://itunes.apple.com/us/app/mercadopago/id925436649")!
+
+                UIApplication.sharedApplication().openURL(downloadMPUrl)
+            }
             break
         case 1:
             break
