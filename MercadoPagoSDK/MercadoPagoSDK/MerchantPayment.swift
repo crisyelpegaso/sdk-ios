@@ -21,6 +21,7 @@ public class MerchantPayment : NSObject {
         super.init()
     }
     
+  
     public init(item: Item, installments: Int, cardIssuerId: NSNumber, token: String, paymentMethodId: String, campaignId: Int, merchantAccessToken: String) {
         self.item = item
         self.installments = installments

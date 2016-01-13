@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MercadoPagoSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.whiteColor()
         
         self.nav = UINavigationController()
-        
+
         let exmaplesViewController = ExamplesViewController()
         
         // Put vaultController at the top of navigator.

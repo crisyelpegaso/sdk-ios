@@ -63,4 +63,30 @@ public class MerchantServer : NSObject {
             }
         }, failure: failure)
     }
+    
+    public class func createPreference(preference : CheckoutPreference, success: (checkoutPreference: CheckoutPreference) -> Void, failure: ((error: NSError) -> Void)?) {
+        
+        let service : MerchantService = MerchantService(baseURL: MercadoPagoContext.baseURL())
+        
+        service.createPreference(preference: preference, success: { (jsonResult: AnyObject?) -> Void in
+            var checkoutPreference : CheckoutPreference? = nil
+            
+            if let preferenceDic = jsonResult as? NSDictionary {
+                if preferenceDic["error"] != nil && failure != nil {
+                    failure!(error : NSError(domain: "mercadopago.merchantServer.createPreference", code: MercadoPago.ERROR_API_CODE, userInfo: ["message" : "PREFERENCE_ERROR".localized]))
+                } else {
+                    if preferenceDic.allKeys.count > 0 {
+                        checkoutPreference = CheckoutPreference.fromJSON(preferenceDic)
+                        success(checkoutPreference: checkoutPreference!)
+                    }
+                }
+            }
+            
+            failure?(error: NSError(domain: "mercadopago.sdk.merchantServer.createPreference", code: MercadoPago.ERROR_UNKNOWN_CODE, userInfo: ["message": "Response cannot be decoded"]))
+            
+            }, failure: failure)
+        
+    }
+    
+    
 }

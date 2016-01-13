@@ -21,7 +21,6 @@ public class MPStepBuilder : NSObject {
         return NewCardViewController(keyType: MercadoPagoContext.keyType(), key: MercadoPagoContext.keyValue(), paymentMethod: paymentMethod, requireSecurityCode: requireSecurityCode, callback: callback)
         
     }
-
     
     public class func startPaymentMethodsStep(supportedPaymentTypes: [String], callback:(paymentMethod: PaymentMethod) -> Void) -> PaymentMethodsViewController {
         

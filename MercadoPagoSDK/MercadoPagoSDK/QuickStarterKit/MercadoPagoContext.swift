@@ -22,6 +22,8 @@ public class MercadoPagoContext {
     
     var merchant_access_token: String = ""
     
+    var preference_uri: String = ""
+    
     private class var PUBLIC_KEY : String {
         return "public_key"
     }
@@ -94,6 +96,12 @@ public class MercadoPagoContext {
     public class func customerURI() -> String {
         
         return sharedInstance.customer_uri
+        
+    }
+    
+    public class func preferenceURI() -> String {
+        
+        return sharedInstance.preference_uri
         
     }
     

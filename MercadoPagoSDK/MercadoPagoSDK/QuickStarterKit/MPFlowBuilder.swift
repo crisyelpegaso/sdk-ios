@@ -16,6 +16,8 @@ public class MPFlowBuilder : NSObject {
         
         return VaultViewController(merchantPublicKey: MercadoPagoContext.publicKey(), merchantBaseUrl: MercadoPagoContext.baseURL(), merchantGetCustomerUri: MercadoPagoContext.customerURI(), merchantAccessToken: MercadoPagoContext.merchantAccessToken(), amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
         
-        
     }
+    
+    
+
 }
