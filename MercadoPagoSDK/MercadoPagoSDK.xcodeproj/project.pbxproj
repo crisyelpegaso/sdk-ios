@@ -240,6 +240,8 @@
 		0FE3E3801AE706B600C27B97 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E37E1AE706B600C27B97 /* Utils.swift */; };
 		0FE3E38D1AE7174600C27B97 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E38C1AE7174600C27B97 /* Serializable.swift */; };
 		0FE3E38E1AE7174600C27B97 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E38C1AE7174600C27B97 /* Serializable.swift */; };
+		155692D11C47D75900521403 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C801C46A21C00120347 /* CheckoutViewController.swift */; };
+		155692D21C47DA1200521403 /* PreferencePaymentMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C771C45A24600120347 /* PreferencePaymentMethods.swift */; };
 		15EFA3391C4423DA007D67D0 /* MercadoPagoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EFA3351C4423DA007D67D0 /* MercadoPagoContext.swift */; };
 		15EFA33A1C4423DA007D67D0 /* MercadoPagoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EFA3351C4423DA007D67D0 /* MercadoPagoContext.swift */; };
 		15EFA33B1C4423DA007D67D0 /* MPFlowBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EFA3361C4423DA007D67D0 /* MPFlowBuilder.swift */; };
@@ -508,6 +510,7 @@
 				0F98833B1AD2AB6000F750F0 /* CardNumber.swift */,
 				0F98833C1AD2AB6000F750F0 /* CardToken.swift */,
 				0F98833D1AD2AB6000F750F0 /* Cause.swift */,
+				76743C751C45A00E00120347 /* CheckoutPreference.swift */,
 				0F98833E1AD2AB6000F750F0 /* Currency.swift */,
 				0F98833F1AD2AB6000F750F0 /* Customer.swift */,
 				0F9883401AD2AB6000F750F0 /* Device.swift */,
@@ -526,7 +529,9 @@
 				0F98834D1AD2AB6000F750F0 /* Payment.swift */,
 				0F98834E1AD2AB6000F750F0 /* PaymentMethod.swift */,
 				0F98834F1AD2AB6000F750F0 /* PaymentMethodRow.swift */,
+				76743C7A1C46951100120347 /* PaymentType.swift */,
 				0F9883501AD2AB6000F750F0 /* Phone.swift */,
+				76743C771C45A24600120347 /* PreferencePaymentMethods.swift */,
 				0F9883511AD2AB6000F750F0 /* Refund.swift */,
 				0F9883521AD2AB6000F750F0 /* SavedCardToken.swift */,
 				0F9883531AD2AB6000F750F0 /* SecurityCode.swift */,
@@ -534,9 +539,6 @@
 				0F9883551AD2AB6000F750F0 /* Token.swift */,
 				0F9883561AD2AB6000F750F0 /* TransactionDetails.swift */,
 				0FC4FC171B0FAA6400CF7148 /* Promo.swift */,
-				76743C751C45A00E00120347 /* CheckoutPreference.swift */,
-				76743C771C45A24600120347 /* PreferencePaymentMethods.swift */,
-				76743C7A1C46951100120347 /* PaymentType.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1120,6 +1122,7 @@
 				0F98836C1AD2AB6000F750F0 /* Customer.swift in Sources */,
 				0F9884021AD2ADEE00F750F0 /* IssuersViewController.swift in Sources */,
 				0F9884321AD2AE5900F750F0 /* InstallmentTableViewCell.swift in Sources */,
+				155692D11C47D75900521403 /* CheckoutViewController.swift in Sources */,
 				0FC4FC3A1B0FB53500CF7148 /* PromoViewController.swift in Sources */,
 				0F98861E1AD3981A00F750F0 /* GenericErrorView.swift in Sources */,
 				0F9883A81AD2AB8000F750F0 /* MercadoPagoService.swift in Sources */,
@@ -1193,6 +1196,7 @@
 				0F9883F51AD2ADD300F750F0 /* PaymentMethodsViewController.swift in Sources */,
 				0F9883D31AD2AD5500F750F0 /* CongratsPaymentMethodTableViewCell.swift in Sources */,
 				0F9883D71AD2AD5500F750F0 /* PaymentIDTableViewCell.swift in Sources */,
+				155692D21C47DA1200521403 /* PreferencePaymentMethods.swift in Sources */,
 				15EFA33E1C4423DA007D67D0 /* MPServicesBuilder.swift in Sources */,
 				0FC4FC341B0FB36F00CF7148 /* PromoTyCDetailTableViewCell.swift in Sources */,
 				0F9884441AD2AEB600F750F0 /* MPSecurityCodeTableViewCell.swift in Sources */,

@@ -18,18 +18,17 @@ public class MPStepBuilder : NSObject {
     
     public class func startNewCardStep(paymentMethod: PaymentMethod, requireSecurityCode: Bool = true, callback: (cardToken: CardToken) -> Void) -> NewCardViewController {
         
-        return NewCardViewController(keyType: MercadoPagoContext.keyType(), key: MercadoPagoContext.keyValue(), paymentMethod: paymentMethod, requireSecurityCode: requireSecurityCode, callback: callback)
+        return NewCardViewController(paymentMethod: paymentMethod, requireSecurityCode: requireSecurityCode, callback: callback)
         
     }
     
-    public class func startPaymentMethodsStep(supportedPaymentTypes: [String], callback:(paymentMethod: PaymentMethod) -> Void) -> PaymentMethodsViewController {
+    public class func startPaymentMethodsStep(supportedPaymentTypes: Set<PaymentTypeId>, callback:(paymentMethod: PaymentMethod) -> Void) -> PaymentMethodsViewController {
         
-        
-        return PaymentMethodsViewController(merchantPublicKey: MercadoPagoContext.publicKey(), supportedPaymentTypes: supportedPaymentTypes, callback: callback)
+        return PaymentMethodsViewController(supportedPaymentTypes: supportedPaymentTypes, callback: callback)
     }
     
     public class func startIssuersStep(paymentMethod: PaymentMethod, callback: (issuer: Issuer) -> Void) -> IssuersViewController {
-        return IssuersViewController(merchantPublicKey:  MercadoPagoContext.publicKey(), paymentMethod: paymentMethod, callback: callback)
+        return IssuersViewController(paymentMethod: paymentMethod, callback: callback)
     }
     
     public class func startInstallmentsStep(payerCosts: [PayerCost], amount: Double, callback: (payerCost: PayerCost?) -> Void) -> InstallmentsViewController {
@@ -41,7 +40,7 @@ public class MPStepBuilder : NSObject {
     }
     
     public class func startPromosStep() -> PromoViewController {
-        return PromoViewController(publicKey:  MercadoPagoContext.publicKey())
+        return PromoViewController()
     }
     
     

@@ -60,4 +60,10 @@ public class CheckoutPreference : NSObject {
         }
         return amount
     }
+    
+    public func getPaymentTypeIdsSupported() -> Set<PaymentTypeId> {
+        let ptIds = PaymentType.allPaymentIDs.subtract(paymentMethods!.excludedPaymentTypes!)
+        return ptIds
+    }
+ 
 }

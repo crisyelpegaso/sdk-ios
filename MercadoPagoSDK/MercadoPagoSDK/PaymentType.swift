@@ -10,7 +10,10 @@ import UIKit
 
 public class PaymentType: NSObject {
 
-    var id : String!
+    public static let allPaymentIDs : Set<PaymentTypeId> = [PaymentTypeId.DEBIT_CARD,PaymentTypeId.CREDIT_CARD]
+
+    
+    var paymentTypeId : PaymentTypeId!
     
     override public init(){
         super.init()
@@ -19,8 +22,14 @@ public class PaymentType: NSObject {
     public class func fromJSON(json : NSDictionary) -> PaymentType {
         let paymentType = PaymentType()
         if json["id"] != nil && !(json["id"]! is NSNull) {
-            paymentType.id = json["id"] as? String
+            
+            paymentType.paymentTypeId = PaymentTypeId(rawValue: (json["id"]!.stringValue))
         }
         return paymentType
     }
+}
+
+public enum PaymentTypeId :String {
+    case DEBIT_CARD = "debit_card"
+    case CREDIT_CARD = "credit_card"
 }

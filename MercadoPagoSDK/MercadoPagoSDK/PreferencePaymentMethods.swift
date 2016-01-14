@@ -11,7 +11,7 @@ import UIKit
 public class PreferencePaymentMethods: NSObject {
 
     var excludedPaymentMethods : [PaymentMethod]?
-    var excludedPaymentTypes : [PaymentType]?
+    var excludedPaymentTypes : Set<PaymentTypeId>?
     var defaultPaymentMethodId : PaymentMethod?
     var installments : Int?
     var defaultInstallments : Int?
@@ -53,6 +53,8 @@ public class PreferencePaymentMethods: NSObject {
         return preferencePaymentMethods
     }
 
+    
+ 
     
 
     

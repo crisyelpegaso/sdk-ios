@@ -8,27 +8,41 @@
 
 import UIKit
 
-class CheckoutViewController: UIViewController {
+public class CheckoutViewController: UIViewController {
 
-    var preference : CheckoutPreference?
+    var preference : CheckoutPreference!
+    var vaultVC : VaultViewController?
+    var callback : ((Payment, PaymentMethod) -> Void)?
     
-    init(preference : CheckoutPreference){
+    init(preference : CheckoutPreference, callback : ((Payment, PaymentMethod) -> Void)){
         super.init(nibName: "CheckoutViewController", bundle: nil)
         self.preference = preference
+        self.callback = callback
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
-        MPFlowBuilder.startVaultViewController(preference!.getAmount(), supportedPaymentTypes: ["credit_card"]) { (paymentMethod, tokenId, issuerId, installments) -> Void in
-            //TODO : post payment
+        vaultVC = MPFlowBuilder.startVaultViewController(preference!.getAmount(), supportedPaymentTypes: preference.getPaymentTypeIdsSupported()) { (paymentMethod, tokenId, issuerId, installments) -> Void in
+            
+            let merchantPayment : MerchantPayment = MerchantPayment(items: self.preference.items!, installments: installments, cardIssuerId: issuerId!, tokenId: tokenId!, paymentMethodId: paymentMethod._id, campaignId: 0)
+            
+            MPServicesBuilder.createPayment(MPServicesBuilder.MP_API_BASE_URL, merchantPaymentUri: MPServicesBuilder.MP_PAYMENTS_URI, payment: merchantPayment, success: { (payment) -> Void in
+                self.navigationController?.pushViewController(MPStepBuilder.startCongratsStep(payment, paymentMethod: paymentMethod), animated: true)
+                }, failure: { (error) -> Void in
+                    MercadoPago.showAlertViewWithError(error, nav: self.navigationController)
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+            })
+           
         }
+
+        self.navigationController?.pushViewController(self.vaultVC!, animated: true)
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     

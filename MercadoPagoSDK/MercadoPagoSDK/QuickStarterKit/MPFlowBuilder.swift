@@ -12,11 +12,18 @@ public class MPFlowBuilder : NSObject {
     
     
     
-    public class func startVaultViewController(amount: Double, supportedPaymentTypes: [String], callback: (paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void) -> VaultViewController {
+    public class func startVaultViewController(amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void) -> VaultViewController {
         
-        return VaultViewController(merchantPublicKey: MercadoPagoContext.publicKey(), merchantBaseUrl: MercadoPagoContext.baseURL(), merchantGetCustomerUri: MercadoPagoContext.customerURI(), merchantAccessToken: MercadoPagoContext.merchantAccessToken(), amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
+        return VaultViewController( amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
         
     }
+    
+    public class func starCheckoutViewController(preference: CheckoutPreference, callback: (Payment, PaymentMethod) -> Void) -> CheckoutViewController {
+       
+        return CheckoutViewController(preference: preference, callback: callback)
+        
+    }
+    
     
     
 
