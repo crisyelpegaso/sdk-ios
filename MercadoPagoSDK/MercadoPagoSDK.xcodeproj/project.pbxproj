@@ -240,6 +240,14 @@
 		0FE3E3801AE706B600C27B97 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E37E1AE706B600C27B97 /* Utils.swift */; };
 		0FE3E38D1AE7174600C27B97 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E38C1AE7174600C27B97 /* Serializable.swift */; };
 		0FE3E38E1AE7174600C27B97 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE3E38C1AE7174600C27B97 /* Serializable.swift */; };
+		76743C851C47229E00120347 /* CheckoutPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C841C47229E00120347 /* CheckoutPreference.swift */; };
+		76743C8A1C47235100120347 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C891C47235100120347 /* CheckoutViewController.swift */; };
+		76743C8C1C4723A400120347 /* PaymentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C8B1C4723A400120347 /* PaymentType.swift */; };
+		76743C8E1C47284100120347 /* PreferencePaymentMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C8D1C47284100120347 /* PreferencePaymentMethods.swift */; };
+		76743C8F1C472C3D00120347 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C891C47235100120347 /* CheckoutViewController.swift */; };
+		76743C901C472D3600120347 /* CheckoutPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76743C841C47229E00120347 /* CheckoutPreference.swift */; };
+		76743C921C47309300120347 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76743C911C47309300120347 /* CheckoutViewController.xib */; };
+		76743C931C47320100120347 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76743C911C47309300120347 /* CheckoutViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -378,6 +386,11 @@
 		0FDB3DAD1B1683610047A4D4 /* MPToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPToolbar.swift; sourceTree = "<group>"; };
 		0FE3E37E1AE706B600C27B97 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0FE3E38C1AE7174600C27B97 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		76743C841C47229E00120347 /* CheckoutPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutPreference.swift; sourceTree = "<group>"; };
+		76743C891C47235100120347 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		76743C8B1C4723A400120347 /* PaymentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentType.swift; sourceTree = "<group>"; };
+		76743C8D1C47284100120347 /* PreferencePaymentMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencePaymentMethods.swift; sourceTree = "<group>"; };
+		76743C911C47309300120347 /* CheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +522,9 @@
 				0F9883551AD2AB6000F750F0 /* Token.swift */,
 				0F9883561AD2AB6000F750F0 /* TransactionDetails.swift */,
 				0FC4FC171B0FAA6400CF7148 /* Promo.swift */,
+				76743C841C47229E00120347 /* CheckoutPreference.swift */,
+				76743C8B1C4723A400120347 /* PaymentType.swift */,
+				76743C8D1C47284100120347 /* PreferencePaymentMethods.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -560,6 +576,7 @@
 		0F9883C01AD2AD3200F750F0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				76743C881C47234100120347 /* Checkout */,
 				0FC4FC1D1B0FAEBF00CF7148 /* Promos */,
 				0F98861B1AD397F400F750F0 /* Utils */,
 				0F98843B1AD2AE8000F750F0 /* Vault */,
@@ -785,6 +802,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		76743C881C47234100120347 /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				76743C891C47235100120347 /* CheckoutViewController.swift */,
+				76743C911C47309300120347 /* CheckoutViewController.xib */,
+			);
+			name = Checkout;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -894,6 +920,7 @@
 				0F98842B1AD2AE3100F750F0 /* NewCardViewController.xib in Resources */,
 				0F9884451AD2AEB600F750F0 /* MPSecurityCodeTableViewCell.xib in Resources */,
 				0FC4FC3B1B0FB53500CF7148 /* PromoViewController.xib in Resources */,
+				76743C921C47309300120347 /* CheckoutViewController.xib in Resources */,
 				0F9884511AD2AEEF00F750F0 /* MPPaymentMethodEmptyTableViewCell.xib in Resources */,
 				0F9884491AD2AEC000F750F0 /* MPInstallmentsTableViewCell.xib in Resources */,
 				0F9883D81AD2AD5500F750F0 /* PaymentIDTableViewCell.xib in Resources */,
@@ -931,6 +958,7 @@
 				0F98842C1AD2AE3100F750F0 /* NewCardViewController.xib in Resources */,
 				0F9884461AD2AEB600F750F0 /* MPSecurityCodeTableViewCell.xib in Resources */,
 				0FC4FC3C1B0FB53500CF7148 /* PromoViewController.xib in Resources */,
+				76743C931C47320100120347 /* CheckoutViewController.xib in Resources */,
 				0F9884521AD2AEEF00F750F0 /* MPPaymentMethodEmptyTableViewCell.xib in Resources */,
 				0F98844A1AD2AEC000F750F0 /* MPInstallmentsTableViewCell.xib in Resources */,
 				0F9883D91AD2AD5500F750F0 /* PaymentIDTableViewCell.xib in Resources */,
@@ -961,6 +989,7 @@
 			files = (
 				0F9883DA1AD2AD5500F750F0 /* PaymentDateTableViewCell.swift in Sources */,
 				0F9883691AD2AB6000F750F0 /* Currency.swift in Sources */,
+				76743C8A1C47235100120347 /* CheckoutViewController.swift in Sources */,
 				0FC4FBF51B0F4F4800CF7148 /* KeyboardDelegate.swift in Sources */,
 				0F9883FD1AD2ADEE00F750F0 /* IssuerTableViewCell.swift in Sources */,
 				0F9883A51AD2AB8000F750F0 /* MerchantService.swift in Sources */,
@@ -976,9 +1005,11 @@
 				0FE3E38D1AE7174600C27B97 /* Serializable.swift in Sources */,
 				0F9883A31AD2AB8000F750F0 /* PaymentService.swift in Sources */,
 				0F98845B1AD2AF1500F750F0 /* VaultViewController.swift in Sources */,
+				76743C851C47229E00120347 /* CheckoutPreference.swift in Sources */,
 				0F9883831AD2AB6000F750F0 /* Payer.swift in Sources */,
 				0F9883711AD2AB6000F750F0 /* FeesDetail.swift in Sources */,
 				0F9883F41AD2ADD300F750F0 /* PaymentMethodsViewController.swift in Sources */,
+				76743C8C1C4723A400120347 /* PaymentType.swift in Sources */,
 				0FC4FC211B0FAF0E00CF7148 /* PromoTableViewCell.swift in Sources */,
 				0F9883611AD2AB6000F750F0 /* CardIssuer.swift in Sources */,
 				0F9884191AD2AE2700F750F0 /* MPCardNumberTableViewCell.swift in Sources */,
@@ -1030,6 +1061,7 @@
 				0F9883AF1AD2ACFE00F750F0 /* CurrenciesUtil.swift in Sources */,
 				0F9883DE1AD2AD5500F750F0 /* CongratsViewController.swift in Sources */,
 				0F9883651AD2AB6000F750F0 /* CardToken.swift in Sources */,
+				76743C8E1C47284100120347 /* PreferencePaymentMethods.swift in Sources */,
 				0F98838F1AD2AB6000F750F0 /* Refund.swift in Sources */,
 				0F98835F1AD2AB6000F750F0 /* Cardholder.swift in Sources */,
 				0F9883911AD2AB6000F750F0 /* SavedCardToken.swift in Sources */,
@@ -1052,6 +1084,7 @@
 			files = (
 				0F98838C1AD2AB6000F750F0 /* PaymentMethodRow.swift in Sources */,
 				0F98844C1AD2AEC000F750F0 /* MPInstallmentsTableViewCell.swift in Sources */,
+				76743C8F1C472C3D00120347 /* CheckoutViewController.swift in Sources */,
 				0F9883801AD2AB6000F750F0 /* MerchantPayment.swift in Sources */,
 				0F9883621AD2AB6000F750F0 /* CardIssuer.swift in Sources */,
 				0F9883DF1AD2AD5500F750F0 /* CongratsViewController.swift in Sources */,
@@ -1133,6 +1166,7 @@
 				0FC4FC341B0FB36F00CF7148 /* PromoTyCDetailTableViewCell.swift in Sources */,
 				0F9884441AD2AEB600F750F0 /* MPSecurityCodeTableViewCell.swift in Sources */,
 				0F98837C1AD2AB6000F750F0 /* Issuer.swift in Sources */,
+				76743C901C472D3600120347 /* CheckoutPreference.swift in Sources */,
 				0F9883681AD2AB6000F750F0 /* Cause.swift in Sources */,
 				0F2071C31B1F4BF700CE11AB /* UILoadingView.swift in Sources */,
 			);

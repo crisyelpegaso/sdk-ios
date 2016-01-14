@@ -41,7 +41,10 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
 	
     let BIN_LENGTH : Int = 6
 	
-    let MP_API_BASE_URL : String = "https://api.mercadopago.com"
+    static let MP_API_BASE_URL : String = "https://api.mercadopago.com"
+    static let MP_CUSTOMER_URI = "/preferences?"
+    static let MP_PAYMENTS_URI = "/v1/payments"
+    
     public var privateKey : String?
     public var publicKey : String?
     
@@ -103,11 +106,16 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
         return VaultViewController(merchantPublicKey: merchantPublicKey, merchantBaseUrl: merchantBaseUrl, merchantGetCustomerUri: merchantGetCustomerUri, merchantAccessToken: merchantAccessToken, amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
     }
     
+    //TODO: verify callback
+    public class func startCheckoutViewController(merchantPublicKey: String, merchantAccessToken: String!, preference : CheckoutPreference) -> CheckoutViewController {
+        return CheckoutViewController(publicKey: merchantPublicKey, accessToken: merchantAccessToken, preference: preference)
+    }
+    
     public func createNewCardToken(cardToken : CardToken, success: (token : Token?) -> Void, failure: ((error: NSError) -> Void)?) {
         
         if self.publicKey != nil {
             cardToken.device = Device()
-            let service : GatewayService = GatewayService(baseURL: MP_API_BASE_URL)
+            let service : GatewayService = GatewayService(baseURL: MercadoPago.MP_API_BASE_URL)
             service.getToken(public_key: self.publicKey!, cardToken: cardToken, success: {(jsonResult: AnyObject?) -> Void in
                 var token : Token? = nil
                 if let tokenDic = jsonResult as? NSDictionary {
@@ -133,7 +141,7 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
         if self.publicKey != nil {
             savedCardToken.device = Device()
             
-            let service : GatewayService = GatewayService(baseURL: MP_API_BASE_URL)
+            let service : GatewayService = GatewayService(baseURL: MercadoPago.MP_API_BASE_URL)
             service.getToken(public_key: self.publicKey!, savedCardToken: savedCardToken, success: {(jsonResult: AnyObject?) -> Void in
                 var token : Token? = nil
                 if let tokenDic = jsonResult as? NSDictionary {
@@ -157,7 +165,7 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
     public func getPaymentMethods(success: (paymentMethods: [PaymentMethod]?) -> Void, failure: ((error: NSError) -> Void)?) {
         
         if self.publicKey != nil {
-            let service : PaymentService = PaymentService(baseURL: MP_API_BASE_URL)
+            let service : PaymentService = PaymentService(baseURL: MercadoPago.MP_API_BASE_URL)
             service.getPaymentMethods(public_key: self.publicKey!, success: {(jsonResult: AnyObject?) -> Void in
                 if let errorDic = jsonResult as? NSDictionary {
                     if errorDic["error"] != nil {
@@ -188,7 +196,7 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
     public func getIdentificationTypes(success: (identificationTypes: [IdentificationType]?) -> Void, failure: ((error: NSError) -> Void)?) {
         
         if self.publicKey != nil {
-            let service : IdentificationService = IdentificationService(baseURL: MP_API_BASE_URL)
+            let service : IdentificationService = IdentificationService(baseURL: MercadoPago.MP_API_BASE_URL)
             service.getIdentificationTypes(public_key: self.publicKey, privateKey: self.privateKey, success: {(jsonResult: AnyObject?) -> Void in
                 
                 if let error = jsonResult as? NSDictionary {
@@ -220,7 +228,7 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
     public func getInstallments(bin: String, amount: Double, issuerId: NSNumber?, paymentTypeId: String, success: (installments: [Installment]?) -> Void, failure: ((error: NSError) -> Void)?) {
         
         if self.publicKey != nil {
-            let service : PaymentService = PaymentService(baseURL: MP_API_BASE_URL)
+            let service : PaymentService = PaymentService(baseURL: MercadoPago.MP_API_BASE_URL)
             service.getInstallments(public_key: self.publicKey!, bin: bin, amount: amount, issuer_id: issuerId, payment_type_id: paymentTypeId, success: {(jsonResult: AnyObject?) -> Void in
                 
                 if let errorDic = jsonResult as? NSDictionary {
@@ -254,7 +262,7 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
     public func getIssuers(paymentMethodId : String, success: (issuers: [Issuer]?) -> Void, failure: ((error: NSError) -> Void)?) {
         
         if self.publicKey != nil {
-            let service : PaymentService = PaymentService(baseURL: MP_API_BASE_URL)
+            let service : PaymentService = PaymentService(baseURL: MercadoPago.MP_API_BASE_URL)
             service.getIssuers(public_key: self.publicKey!, payment_method_id: paymentMethodId, success: {(jsonResult: AnyObject?) -> Void in
                 if let errorDic = jsonResult as? NSDictionary {
                     if errorDic["error"] != nil {
@@ -284,7 +292,7 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
 	
 	public func getPromos(success: (promos: [Promo]?) -> Void, failure: ((error: NSError) -> Void)?) {
 		// TODO: Está hecho para MLA fijo porque va a cambiar la URL para que dependa de una API y una public key
-		let service : PromosService = PromosService(baseURL: MP_API_BASE_URL)
+		let service : PromosService = PromosService(baseURL: MercadoPago.MP_API_BASE_URL)
 		service.getPromos(public_key: self.publicKey!, success: { (jsonResult) -> Void in
 			let promosArray = jsonResult as? NSArray?
 			var promos : [Promo] = [Promo]()
@@ -367,4 +375,29 @@ public class MercadoPago : NSObject, UIAlertViewDelegate {
 		}
 	}
     
-}
+    public class func createMPPayment(payment : MerchantPayment, success: (payment: Payment) -> Void, failure: ((error: NSError) -> Void)?) {
+        let service : MerchantService = MerchantService(baseURL: MP_API_BASE_URL, createPaymentUri: MP_PAYMENTS_URI)
+        service.createPayment(payment: payment, success: {(jsonResult: AnyObject?) -> Void in
+            var payment : Payment? = nil
+            
+            if let paymentDic = jsonResult as? NSDictionary {
+                if paymentDic["error"] != nil {
+                    if failure != nil {
+                        failure!(error: NSError(domain: "mercadopago.sdk.merchantServer.createPayment", code: MercadoPago.ERROR_API_CODE, userInfo: paymentDic as [NSObject : AnyObject]))
+                    }
+                } else {
+                    if paymentDic.allKeys.count > 0 {
+                        payment = Payment.fromJSON(paymentDic)
+                        success(payment: payment!)
+                    } else {
+                        failure!(error: NSError(domain: "mercadopago.sdk.merchantServer.createPayment", code: MercadoPago.ERROR_PAYMENT, userInfo: ["message": "PAYMENT_ERROR".localized]))
+                    }
+                    
+                }
+            } else {
+                if failure != nil {
+                    failure!(error: NSError(domain: "mercadopago.sdk.merchantServer.createPayment", code: MercadoPago.ERROR_UNKNOWN_CODE, userInfo: ["message": "Response cannot be decoded"]))
+                }
+            }
+            }, failure: failure)
+    }}

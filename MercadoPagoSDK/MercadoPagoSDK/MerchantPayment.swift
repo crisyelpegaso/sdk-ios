@@ -13,7 +13,7 @@ public class MerchantPayment : NSObject {
     public var cardToken : String!
     public var campaignId : Int = 0
     public var installments : Int = 0
-    public var item : Item!
+    public var items : [Item]!
     public var merchantAccessToken : String!
     public var paymentMethodId : String!
     
@@ -21,8 +21,8 @@ public class MerchantPayment : NSObject {
         super.init()
     }
     
-    public init(item: Item, installments: Int, cardIssuerId: NSNumber, token: String, paymentMethodId: String, campaignId: Int, merchantAccessToken: String) {
-        self.item = item
+    public init(items: [Item], installments: Int, cardIssuerId: NSNumber, token: String, paymentMethodId: String, campaignId: Int, merchantAccessToken: String) {
+        self.items = items
         self.installments = installments
         self.cardIssuerId = cardIssuerId
         self.cardToken = token
@@ -36,7 +36,8 @@ public class MerchantPayment : NSObject {
             "card_issuer_id": self.cardIssuerId == 0 ? JSON.null : self.cardIssuerId,
             "card_token": self.cardToken == nil ? JSON.null : self.cardToken!,
             "campaign_id": self.campaignId == 0 ? JSON.null : String(self.campaignId),
-            "item": self.item == nil ? JSON.null : JSON.parse(self.item!.toJSONString()).mutableCopyOfTheObject(),
+            //TODO
+            //"items": self.items == nil ? JSON.null : JSON.parse(self.item!.toJSONString()).mutableCopyOfTheObject(),
             "installments" : self.installments == 0 ? JSON.null : self.installments,
             "merchant_access_token" : self.merchantAccessToken == nil ? JSON.null : self.merchantAccessToken!,
             "payment_method_id" : self.paymentMethodId == nil ? JSON.null : self.paymentMethodId!

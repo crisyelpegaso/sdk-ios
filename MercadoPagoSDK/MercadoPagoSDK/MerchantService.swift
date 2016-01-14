@@ -14,6 +14,7 @@ public class MerchantService : MercadoPagoService {
     var createPaymentUri : String?
     var getCustomerUri : String?
     var getDiscountUri : String?
+    var preferenceUri : String?
     
     public var data: NSMutableData = NSMutableData()
     
@@ -32,11 +33,20 @@ public class MerchantService : MercadoPagoService {
         self.getDiscountUri = getDiscountUri
     }
     
+    init (baseURL : String, preferenceUri : String) {
+        super.init(baseURL: baseURL)
+        self.preferenceUri = preferenceUri
+    }
+    
     public func getCustomer(method : String = "GET", merchant_access_token : String, success: (jsonResult: AnyObject?) -> Void, failure: ((error: NSError) -> Void)?) {
         self.request(getCustomerUri!, params: "merchant_access_token=" + merchant_access_token, body: nil, method: method, success: success, failure: failure)
     }
     
     public func createPayment(method : String = "POST", payment : MerchantPayment, success: (jsonResult: AnyObject?) -> Void, failure: ((error: NSError) -> Void)?) {
         self.request(createPaymentUri!, params: nil, body: payment.toJSONString(), method: method, success: success, failure: failure)
+    }
+    
+    public func createPreference(method : String = "POST", preference : CheckoutPreference, success: (jsonResult: AnyObject?) -> Void, failure: ((error: NSError) -> Void)?) {
+        self.request("createPreferenceUri", params: nil, body: preference.toJSONString(), method: method, success: success, failure: failure)
     }
 }
