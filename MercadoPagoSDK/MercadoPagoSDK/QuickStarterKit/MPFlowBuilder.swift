@@ -12,7 +12,7 @@ public class MPFlowBuilder : NSObject {
     
     
     
-    public class func startVaultViewController(amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void) -> VaultViewController {
+    public class func startVaultViewController(amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, tokenId: String?, issuer: Issuer?, installments: Int) -> Void) -> VaultViewController {
         
         return VaultViewController( amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
         

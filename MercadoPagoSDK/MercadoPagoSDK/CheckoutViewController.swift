@@ -26,9 +26,9 @@ public class CheckoutViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        vaultVC = MPFlowBuilder.startVaultViewController(preference!.getAmount(), supportedPaymentTypes: preference.getPaymentTypeIdsSupported()) { (paymentMethod, tokenId, issuerId, installments) -> Void in
+        vaultVC = MPFlowBuilder.startVaultViewController(preference!.getAmount(), supportedPaymentTypes: preference.getPaymentTypeIdsSupported()) { (paymentMethod, tokenId, issuer, installments) -> Void in
             
-            let merchantPayment : MerchantPayment = MerchantPayment(items: self.preference.items!, installments: installments, cardIssuerId: issuerId!, tokenId: tokenId!, paymentMethodId: paymentMethod._id, campaignId: 0)
+            let merchantPayment : MerchantPayment = MerchantPayment(items: self.preference.items!, installments: installments, cardIssuer: issuer!, tokenId: tokenId!, paymentMethod: paymentMethod, campaignId: 0)
             
             MPServicesBuilder.createPayment(MPServicesBuilder.MP_API_BASE_URL, merchantPaymentUri: MPServicesBuilder.MP_PAYMENTS_URI, payment: merchantPayment, success: { (payment) -> Void in
                 self.navigationController?.pushViewController(MPStepBuilder.startCongratsStep(payment, paymentMethod: paymentMethod), animated: true)

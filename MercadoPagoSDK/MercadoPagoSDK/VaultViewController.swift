@@ -19,7 +19,7 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
     var amount : Double = 0
     var bundle : NSBundle? = MercadoPago.getBundle()
     
-    public var callback : ((paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void)?
+    public var callback : ((paymentMethod: PaymentMethod, tokenId: String?, issuer: Issuer?, installments: Int) -> Void)?
     
     // Input controls
     @IBOutlet weak private var tableview : UITableView!
@@ -44,7 +44,7 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
     
     public var supportedPaymentTypes : Set<PaymentTypeId>?
     
-    init( amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, tokenId: String?, issuerId: NSNumber?, installments: Int) -> Void) {
+    init( amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, tokenId: String?, issuer: Issuer?, installments: Int) -> Void) {
         super.init(nibName: "VaultViewController", bundle: bundle)
 
         self.merchantBaseUrl = MercadoPagoContext.baseURL()
@@ -305,7 +305,7 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
 						
 						let installments = self.selectedPayerCost == nil ? 0 : self.selectedPayerCost!.installments
 						
-                        self.callback!(paymentMethod: self.selectedPaymentMethod!, tokenId: tokenId, issuerId: self.selectedIssuer?._id, installments: installments)
+                        self.callback!(paymentMethod: self.selectedPaymentMethod!, tokenId: tokenId, issuer: self.selectedIssuer!, installments: installments)
                         }, failure: { (error: NSError?) -> Void in
                             MercadoPago.showAlertViewWithError(error, nav: self.navigationController)
                     })
@@ -324,7 +324,7 @@ public class VaultViewController : UIViewController, UITableViewDataSource, UITa
 					
 					let installments = self.selectedPayerCost == nil ? 0 : self.selectedPayerCost!.installments
 					
-                    self.callback!(paymentMethod: self.selectedPaymentMethod!, tokenId: tokenId, issuerId: self.selectedIssuer?._id, installments: installments)
+                    self.callback!(paymentMethod: self.selectedPaymentMethod!, tokenId: tokenId, issuer: self.selectedIssuer, installments: installments)
                     }, failure: { (error: NSError?) -> Void in
                         MercadoPago.showAlertViewWithError(error, nav: self.navigationController)
                 })

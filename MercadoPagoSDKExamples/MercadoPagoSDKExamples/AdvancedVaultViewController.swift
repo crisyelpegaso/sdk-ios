@@ -17,13 +17,13 @@ class AdvancedVaultViewController : SimpleVaultViewController {
     var amount : Double = 0
     
     var selectedIssuer : Issuer? = nil
-    var advancedCallback : ((paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void)?
+    var advancedCallback : ((paymentMethod: PaymentMethod, token: String?, issuer: Issuer?, installments: Int) -> Void)?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    init(merchantPublicKey: String, merchantBaseUrl: String, merchantGetCustomerUri: String, merchantAccessToken: String, amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: ((paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void)?) {
+    init(merchantPublicKey: String, merchantBaseUrl: String, merchantGetCustomerUri: String, merchantAccessToken: String, amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: ((paymentMethod: PaymentMethod, token: String?, issuer: Issuer?, installments: Int) -> Void)?) {
         super.init(merchantPublicKey: merchantPublicKey, merchantBaseUrl: merchantBaseUrl, merchantGetCustomerUri: merchantGetCustomerUri, merchantAccessToken: merchantAccessToken, supportedPaymentTypes: supportedPaymentTypes, callback: nil)
         advancedCallback = callback
         self.amount = amount
@@ -183,7 +183,7 @@ class AdvancedVaultViewController : SimpleVaultViewController {
 				
                 mercadoPago.createToken(savedCardToken, success: {(token: Token?) -> Void in
 					self.loadingView.removeFromSuperview()
-                    self.advancedCallback!(paymentMethod: self.selectedPaymentMethod!, token: token?._id, issuerId: self.selectedIssuer?._id, installments: installments)
+                    self.advancedCallback!(paymentMethod: self.selectedPaymentMethod!, token: token?._id, issuer: self.selectedIssuer, installments: installments)
                 }, failure: nil)
             } else {
                 print("Invalid data")
@@ -197,7 +197,7 @@ class AdvancedVaultViewController : SimpleVaultViewController {
 			
             mercadoPago.createNewCardToken(self.selectedCardToken!, success: {(token: Token?) -> Void in
 					self.loadingView.removeFromSuperview()
-                    self.advancedCallback!(paymentMethod: self.selectedPaymentMethod!, token: token?._id, issuerId: self.selectedIssuer?._id, installments: installments)
+                    self.advancedCallback!(paymentMethod: self.selectedPaymentMethod!, token: token?._id, issuer: self.selectedIssuer, installments: installments)
             }, failure: nil)
         }
     }

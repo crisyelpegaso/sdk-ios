@@ -70,23 +70,23 @@ class ExamplesUtils {
         return SimpleVaultViewController(merchantPublicKey: merchantPublicKey, merchantBaseUrl: merchantBaseUrl, merchantGetCustomerUri: merchantGetCustomerUri, merchantAccessToken: merchantAccessToken, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
     }
     
-    class func startAdvancedVaultActivity(merchantPublicKey: String, merchantBaseUrl: String, merchantGetCustomerUri: String, merchantAccessToken: String, amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void) -> AdvancedVaultViewController {
+    class func startAdvancedVaultActivity(merchantPublicKey: String, merchantBaseUrl: String, merchantGetCustomerUri: String, merchantAccessToken: String, amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, token: String?, issuer: Issuer?, installments: Int) -> Void) -> AdvancedVaultViewController {
         return AdvancedVaultViewController(merchantPublicKey: merchantPublicKey, merchantBaseUrl: merchantBaseUrl, merchantGetCustomerUri: merchantGetCustomerUri, merchantAccessToken: merchantAccessToken, amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
     }
     
-    class func startFinalVaultActivity(merchantPublicKey: String, merchantBaseUrl: String, merchantGetCustomerUri: String, merchantAccessToken: String, amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void) -> FinalVaultViewController {
+    class func startFinalVaultActivity(merchantPublicKey: String, merchantBaseUrl: String, merchantGetCustomerUri: String, merchantAccessToken: String, amount: Double, supportedPaymentTypes: Set<PaymentTypeId>, callback: (paymentMethod: PaymentMethod, token: String?, issuer: Issuer?, installments: Int) -> Void) -> FinalVaultViewController {
         return FinalVaultViewController(merchantPublicKey: merchantPublicKey, merchantBaseUrl: merchantBaseUrl, merchantGetCustomerUri: merchantGetCustomerUri, merchantAccessToken: merchantAccessToken, amount: amount, supportedPaymentTypes: supportedPaymentTypes, callback: callback)
     }
     
-    class func createPayment(token: String, installments: Int, cardIssuerId: NSNumber?, paymentMethod: PaymentMethod, callback: (payment: Payment) -> Void) {
+    class func createPayment(token: String, installments: Int, cardIssuer: Issuer?, paymentMethod: PaymentMethod, callback: (payment: Payment) -> Void) {
         // Set item
         let item : Item = Item(_id: ExamplesUtils.ITEM_ID, quantity: ExamplesUtils.ITEM_QUANTITY,
             unitPrice: ExamplesUtils.ITEM_UNIT_PRICE)
 
-		let issuerId : NSNumber = cardIssuerId == nil ? 0 : cardIssuerId!
+		//let issuerId : NSNumber = cardIssuerId == nil ? 0 : cardIssuerId!
 		
         // Set merchant payment
-        let payment : MerchantPayment = MerchantPayment(items: [item], installments: installments, cardIssuerId: issuerId, tokenId: token, paymentMethodId: paymentMethod._id, campaignId: 0)
+        let payment : MerchantPayment = MerchantPayment(items: [item], installments: installments, cardIssuer: cardIssuer, tokenId: token, paymentMethod: paymentMethod, campaignId: 0)
         
         // Create payment
         MerchantServer.createPayment(ExamplesUtils.MERCHANT_MOCK_BASE_URL, merchantPaymentUri: ExamplesUtils.MERCHANT_MOCK_CREATE_PAYMENT_URI, payment: payment, success: callback, failure: nil)
