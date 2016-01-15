@@ -10,7 +10,7 @@ import UIKit
 
 public class PaymentType: NSObject {
 
-    public static let allPaymentIDs : Set<PaymentTypeId> = [PaymentTypeId.DEBIT_CARD,PaymentTypeId.CREDIT_CARD]
+    public static let allPaymentIDs : Set<PaymentTypeId> = [PaymentTypeId.DEBIT_CARD,PaymentTypeId.CREDIT_CARD,PaymentTypeId.ACCOUNT_MONEY,PaymentTypeId.TICKET,PaymentTypeId.BANK_TRANFER,PaymentTypeId.ATM,PaymentTypeId.DIGITAL_CURRENCY,PaymentTypeId.PREPAID_CARD]
 
     
     var paymentTypeId : PaymentTypeId!
@@ -32,4 +32,20 @@ public class PaymentType: NSObject {
 public enum PaymentTypeId :String {
     case DEBIT_CARD = "debit_card"
     case CREDIT_CARD = "credit_card"
+    case ACCOUNT_MONEY = "account_money"
+    case TICKET = "ticket"
+    case BANK_TRANFER = "bank_transfer"
+    case ATM = "atm"
+    case DIGITAL_CURRENCY = "digital_currency"
+    case PREPAID_CARD = "prepaid_card"
 }
+
+
+
+
+
+
+
+
+
+

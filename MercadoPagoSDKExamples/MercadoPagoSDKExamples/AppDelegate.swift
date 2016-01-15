@@ -16,13 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var nav: UINavigationController?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    let publickey = "444a9ef5-8a6b-429f-abdf-587639155d88"
+ 
+    
+    
+    func application(application: UIApplication,
+            didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        MercadoPagoContext.setPublicKey(publickey)
+        MercadoPagoContext.setMerchantAccessToken(ExamplesUtils.MERCHANT_ACCESS_TOKEN)
+        MercadoPagoContext.setBaseURL(ExamplesUtils.MERCHANT_MOCK_BASE_URL)
+        MercadoPagoContext.setCustomerURI(ExamplesUtils.MERCHANT_MOCK_GET_CUSTOMER_URI)
+                
         // Initialize window
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.backgroundColor = UIColor.whiteColor()
         
         self.nav = UINavigationController()
 
+        
         let exmaplesViewController = ExamplesViewController()
         
         // Put vaultController at the top of navigator.

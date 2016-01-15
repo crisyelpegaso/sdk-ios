@@ -80,12 +80,18 @@ class ExamplesViewController: UIViewController, UITableViewDataSource, UITableVi
             self.showViewController(MercadoPago.startVaultViewController(ExamplesUtils.AMOUNT, supportedPaymentTypes: PaymentType.allPaymentIDs, callback: {(paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void in
                     self.createPayment(token, paymentMethod: paymentMethod, installments: installments, cardIssuerId: issuerId, discount: nil)
             }))
+            
+          
+         
 		case 5:
 			self.showViewController(MercadoPago.startVaultViewController(ExamplesUtils.AMOUNT, supportedPaymentTypes: PaymentType.allPaymentIDs, callback: {(paymentMethod: PaymentMethod, token: String?, issuerId: NSNumber?, installments: Int) -> Void in
 				self.createPayment(token, paymentMethod: paymentMethod, installments: installments, cardIssuerId: issuerId, discount: nil)
 			}))
 		case 6:
-			self.showViewController(MercadoPago.startPromosViewController())
+			//self.showViewController(MercadoPago.startPromosViewController())
+            self.showViewController(MPFlowBuilder.startVaultViewController(1000.0, supportedPaymentTypes: PaymentType.allPaymentIDs, callback: { (paymentMethod, tokenId, issuerId, installments) -> Void in
+                print("do something")
+            }))
         case 7:
             self.showViewController(MPFlowBuilder.starCheckoutViewController(ExamplesUtils.createCheckoutPreference(), callback: { (payment:Payment, paymentMethod : PaymentMethod) -> Void in
                 self.showViewController(MPStepBuilder.startCongratsStep(payment, paymentMethod: paymentMethod))

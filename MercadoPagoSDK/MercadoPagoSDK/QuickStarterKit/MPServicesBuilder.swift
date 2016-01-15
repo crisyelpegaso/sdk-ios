@@ -55,7 +55,7 @@ public class MPServicesBuilder : NSObject {
 
     }
     
-    public func getPaymentMethods(success: (paymentMethods: [PaymentMethod]?) -> Void, failure: ((error: NSError) -> Void)?) {
+    public class func getPaymentMethods(success: (paymentMethods: [PaymentMethod]?) -> Void, failure: ((error: NSError) -> Void)?) {
         
               let service : PaymentService = PaymentService(baseURL: MPServicesBuilder.MP_API_BASE_URL)
             service.getPaymentMethods(public_key: MercadoPagoContext.publicKey(), success: {(jsonResult: AnyObject?) -> Void in
